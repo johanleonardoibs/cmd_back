@@ -1,5 +1,5 @@
 {
-  "id": "7cc76efd-9842-492d-b322-a0ecbdb7a6e7",
+  "id": "d0aa312b-73df-41eb-8928-a94e93e79f9a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -32,16 +32,29 @@
           "primaryKey": false,
           "notNull": false
         },
-        "role": {
-          "name": "role",
-          "type": "role",
+        "citizenIdType": {
+          "name": "citizenIdType",
+          "type": "citizenIdType",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
-        "user_secret": {
-          "name": "user_secret",
+        "citizenId": {
+          "name": "citizenId",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "role",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         }
@@ -61,6 +74,15 @@
     }
   },
   "enums": {
+    "public.citizenIdType": {
+      "name": "citizenIdType",
+      "schema": "public",
+      "values": [
+        "cc",
+        "ti",
+        "pp"
+      ]
+    },
     "public.role": {
       "name": "role",
       "schema": "public",
