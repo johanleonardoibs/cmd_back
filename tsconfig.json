@@ -22,6 +22,17 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Route aliases
+    "paths": {
+      "@Controller/*": ["./src/Controller/*"],
+      "@Utils/*": ["./src/Utils/*"],
+      "@Repository/*": ["./src/Repository/*"],
+      "@Domain/*": ["./src/Domain/*"],
+      "@Middleware/*": ["./src/Middleware/*"],
+      "@Service/*": ["./src/Service/*"],
+      "@Security/*": ["./src/Security/*"]
+    }
   }
 }

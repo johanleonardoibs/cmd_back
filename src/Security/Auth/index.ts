@@ -1,6 +1,6 @@
-import type { UserToken } from '../../Domain'
+import type { UserToken } from '@Domain/Entity'
 import jwt from 'jsonwebtoken'
-import { environment } from '../../Utils/environment.ts'
+import { environment } from '@Utils/environment.ts'
 
 export const encryptToken = (user: UserToken) => {
     return jwt.sign(user, environment.APP_SECRET, {

@@ -1,6 +1,6 @@
 import express from 'express'
-import { login, registerUser } from '../../Service/User'
-import type { UserLogin } from '../../Domain'
+import { login, registerUser } from '@Service/User'
+import type { UserLogin } from '@Domain/Entity'
 
 const router = express.Router()
 

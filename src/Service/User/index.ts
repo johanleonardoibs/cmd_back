@@ -2,12 +2,12 @@ import {
     type NewUser,
     type NewUserWithOutPassword,
     type UserLogin,
-} from '../../Domain'
+} from '@Domain/Entity'
 import { getUser, saveUser } from '../../Repository'
-import { Errors } from '../../Domain/Enum/errors.ts'
-import { errorManagement } from '../../Utils/ErrorManagement'
-import { encryptToken } from '../../Security/Auth'
-import { decryptPassword, encryptPassword } from '../../Security/Encrypt'
+import { Errors } from '@Domain/Enum'
+import { errorManagement } from '@Utils/ErrorManagement'
+import { encryptToken } from '@Security/Auth'
+import { decryptPassword, encryptPassword } from '@Security/Encrypt'
 
 export const registerUser = async (user: NewUserWithOutPassword) => {
     const userFull: NewUser = user

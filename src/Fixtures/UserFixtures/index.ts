@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
-import { CitizenIdType, type NewUser, Role, users } from '../../Domain'
+import { CitizenIdType, type NewUser, Role, users } from '@Domain/Entity'
 import DatabaseConnection, { db } from '../../Utils/DatabaseConnection.ts'
-import { encryptPassword } from '../../Security/Encrypt'
+import { encryptPassword } from '@Security/Encrypt'
 
 export const userFixtures = async (): Promise<void> => {
     const password = await encryptPassword('0000000')

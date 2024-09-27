@@ -1,5 +1,5 @@
-import { db } from '../../Utils/DatabaseConnection.ts'
-import { type NewUser, users } from '../../Domain'
+import { db } from '@Utils/DatabaseConnection.ts'
+import { type NewUser, users } from '@Domain/Entity'
 import { eq } from 'drizzle-orm'
 
 export const saveUser = async (user: NewUser) => {
