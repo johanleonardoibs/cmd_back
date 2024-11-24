@@ -1,5 +1,5 @@
 {
-  "id": "d0aa312b-73df-41eb-8928-a94e93e79f9a",
+  "id": "1a785f5d-b220-47dd-a6ee-3c0a39d1787d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -59,12 +59,34 @@
           "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "citizen": {
+          "name": "citizen",
+          "columns": [
+            {
+              "expression": "citizenId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "citizenIdType",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
+        "email": {
+          "name": "email",
           "nullsNotDistinct": false,
           "columns": [
             "email"

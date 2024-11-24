@@ -19,5 +19,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"citizenId" varchar(256),
 	"password" varchar(256),
 	"role" "role",
-	CONSTRAINT "users_email_unique" UNIQUE("email")
+	CONSTRAINT "email" UNIQUE("email")
 );
+--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "citizen" ON "users" USING btree ("citizenId","citizenIdType");

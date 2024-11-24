@@ -7,21 +7,19 @@ const router = express.Router()
 const ROUTE = '/user'
 const ROUTE_AUTH = '/login'
 
-export const UserController = router.post(ROUTE, (req, res) => {
+export const UserController = router.post(ROUTE, async (req, res) => {
     const user = req.body
 
-    registerUser(user).then((obj) => {
-        res.json(obj)
-    })
+    const error = await registerUser(user)
+    if (error) {
+        return res.json(error)
+    }
+
+    res.sendStatus(201)
 })
 
 export const AuthController = router.post(ROUTE_AUTH, async (req, res) => {
     const user: UserLogin = req.body
 
-    try {
-        res.json(await login(user))
-    } catch (e) {
-        console.log(e)
-        res.status(400).json(e)
-    }
+    res.json(await login(user))
 })

@@ -4,17 +4,22 @@ import {
     type UserLogin,
 } from '@Domain/Entity'
 import { getUser, saveUser } from '../../Repository'
-import { Errors } from '@Domain/Enum'
-import { errorManagement } from '@Utils/ErrorManagement'
+import { handleDatabaseError, handleError } from '@Utils/ErrorManagement'
 import { encryptToken } from '@Security/Auth'
 import { decryptPassword, encryptPassword } from '@Security/Encrypt'
+import type { DatabaseError } from 'pg'
+import { Errors } from '@Domain/Enum'
 
 export const registerUser = async (user: NewUserWithOutPassword) => {
     const userFull: NewUser = user
 
     userFull.password = await encryptPassword('default')
 
-    await saveUser(user)
+    try {
+        await saveUser(user)
+    } catch (error: unknown) {
+        return handleDatabaseError(error as DatabaseError)
+    }
 }
 
 export const login = async (userLogin: UserLogin) => {
@@ -30,5 +35,5 @@ export const login = async (userLogin: UserLogin) => {
         }
     }
 
-    throw errorManagement(Errors.USER00)
+    return handleError(Errors.B_USER00)
 }
