@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "bun run src/index.ts",
-    "fixtures": "bun src/Fixtures/index.ts"
+    "fixtures": "bun src/Fixtures/index.ts",
+    "drizzle/generate": "bun drizzle-kit generate",
+    "drizzle/migrate": "bun drizzle-kit migrate"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.2",

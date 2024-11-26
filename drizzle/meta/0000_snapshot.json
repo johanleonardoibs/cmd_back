@@ -1,5 +1,5 @@
 {
-  "id": "1a785f5d-b220-47dd-a6ee-3c0a39d1787d",
+  "id": "f13083df-0c8c-4f87-9575-d4162227dd39",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -30,7 +30,7 @@
           "name": "email",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "citizenIdType": {
           "name": "citizenIdType",
@@ -56,7 +56,7 @@
           "type": "role",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {
@@ -93,6 +93,209 @@
           ]
         }
       }
+    },
+    "public.calendar_entry": {
+      "name": "calendar_entry",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_calendar": {
+          "name": "user_calendar",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_start": {
+          "name": "date_start",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "time": {
+          "name": "time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.calendar_period": {
+      "name": "calendar_period",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_calendar_period": {
+          "name": "user_calendar_period",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_start": {
+          "name": "date_start",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "initial_hour": {
+          "name": "initial_hour",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "time": {
+          "name": "time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "daysOfWeek": {
+          "name": "daysOfWeek",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weeks": {
+          "name": "weeks",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "entryType": {
+          "name": "entryType",
+          "type": "entryType",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.user_to_calendar_entry": {
+      "name": "user_to_calendar_entry",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user": {
+          "name": "user",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "calendar_entry": {
+          "name": "calendar_entry",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_to_calendar_entry_user_users_id_fk": {
+          "name": "user_to_calendar_entry_user_users_id_fk",
+          "tableFrom": "user_to_calendar_entry",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_to_calendar_entry_calendar_entry_calendar_entry_id_fk": {
+          "name": "user_to_calendar_entry_calendar_entry_calendar_entry_id_fk",
+          "tableFrom": "user_to_calendar_entry",
+          "tableTo": "calendar_entry",
+          "columnsFrom": [
+            "calendar_entry"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.user_to_calendar_period": {
+      "name": "user_to_calendar_period",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "calenda_period": {
+          "name": "calenda_period",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user": {
+          "name": "user",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_to_calendar_period_calenda_period_calendar_period_id_fk": {
+          "name": "user_to_calendar_period_calenda_period_calendar_period_id_fk",
+          "tableFrom": "user_to_calendar_period",
+          "tableTo": "calendar_period",
+          "columnsFrom": [
+            "calenda_period"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_to_calendar_period_user_users_id_fk": {
+          "name": "user_to_calendar_period_user_users_id_fk",
+          "tableFrom": "user_to_calendar_period",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
   "enums": {
@@ -112,6 +315,14 @@
         "admin",
         "medic",
         "patient"
+      ]
+    },
+    "public.entryType": {
+      "name": "entryType",
+      "schema": "public",
+      "values": [
+        "work",
+        "free"
       ]
     }
   },

@@ -1,4 +1,4 @@
-import { environment } from './src/Utils/environment.ts'
+import { environment } from '@Utils/environment.ts'
 
 export default {
     dialect: 'postgresql',

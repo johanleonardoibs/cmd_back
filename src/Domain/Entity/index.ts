@@ -1,2 +1,7 @@
 export * from './User'
 export * from './Role'
+export * from './CalendarEntry'
+export * from './CalendarPeriod'
+export * from './EntryType'
+export * from './UserToCalendarEntry'
+export * from './UserToCalendarPeriod'

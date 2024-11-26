@@ -29,8 +29,9 @@ export const login = async (userLogin: UserLogin) => {
         const authOk = await decryptPassword(userLogin.password, user.password)
         if (authOk) {
             return {
-                token: encryptToken(user),
+                token: encryptToken({ ...user, password: undefined }),
                 username: user.name + ' ' + user.surname,
+                role: user.role,
             }
         }
     }
