@@ -6,10 +6,12 @@ import { UserCalendarController } from '@Controller/UserCalendar'
 import { UserCalendarEntryController } from '@Controller/UserCalendarEntry'
 import { ProcedureController } from '@Controller/Procedure'
 import { ScheduleController } from '@Controller/Schedule'
+import cors from 'cors'
 
 const app = Express()
 
 app.use(json())
+app.use(cors({ origin: '*' }))
 app.use(interceptor)
 app.use(errorManagement)
 
