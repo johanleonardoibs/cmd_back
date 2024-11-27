@@ -19,8 +19,16 @@ export const UserController = router.post(
     }
 )
 
-export const AuthController = router.post(Paths.LOGIN, async (req, res) => {
-    const user: UserLogin = req.body
-
-    res.json(await login(user))
-})
+export const AuthController = router
+    .post(Paths.LOGIN, async (req, res) => {
+        const user: UserLogin = req.body
+        res.json(await login(user))
+    })
+    .get(Paths.CHECK, (req, res) => {
+        return res.sendStatus(200)
+    })
+    .get(Paths.ROLE, (req, res) => {
+        return res.json({
+            role: req.user?.role,
+        })
+    })

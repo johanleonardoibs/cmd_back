@@ -3,7 +3,7 @@ import {
     type NewUserWithOutPassword,
     type UserLogin,
 } from '@Domain/Entity'
-import { getUser, saveUser } from '../../Repository'
+import { getUser, saveUser } from '@Repository'
 import { handleDatabaseError, handleError } from '@Utils/ErrorManagement'
 import { encryptToken } from '@Security/Auth'
 import { decryptPassword, encryptPassword } from '@Security/Encrypt'
@@ -31,7 +31,6 @@ export const login = async (userLogin: UserLogin) => {
             return {
                 token: encryptToken({ ...user, password: undefined }),
                 username: user.name + ' ' + user.surname,
-                role: user.role,
             }
         }
     }

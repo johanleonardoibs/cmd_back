@@ -16,6 +16,8 @@ const pathPermissions: Record<string, Role[]> = {
     [Paths.PROCEDURE + '_POST']: [Role.Admin],
     [Paths.PROCEDURE + '_GET']: [Role.Admin],
     [Paths.SCHEDULE + '_POST']: [Role.Admin],
+    [Paths.CHECK + '_GET']: [Role.Admin, Role.Medic, Role.Patient],
+    [Paths.ROLE + '_GET']: [Role.Admin, Role.Medic, Role.Patient],
 }
 
 const isPathProtected = (path: string) => {
