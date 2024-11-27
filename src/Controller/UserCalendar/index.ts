@@ -5,7 +5,7 @@ import {
     createCalendarPeriod,
     getUserCalendarPeriods,
 } from '@Service/UserCalendar'
-import { getUserById } from '@Repository/Users'
+import { getUserById } from '@Repository'
 
 const router = express.Router()
 

@@ -1,4 +1,8 @@
-import type { CalendarPeriod } from '@Domain/Entity'
+import type {
+    CalendarEntry,
+    CalendarPeriod,
+    CreateCalendarEntry,
+} from '@Domain/Entity'
 
 export const isTimeWithinRange = (
     date: Date,
@@ -29,4 +33,26 @@ export const isTimeWithinRange = (
     eventEndTime.setMinutes(eventEndTime.getMinutes() + durationMinutes)
 
     return date >= startTime && eventEndTime <= endTime
+}
+
+export const hasCollision = (
+    newEntry: CreateCalendarEntry,
+    existingEntries: CalendarEntry[]
+): boolean => {
+    const newStart = new Date(newEntry.dateStart)
+    const newEnd = new Date(newStart.getTime() + newEntry.time * 60000)
+
+    return existingEntries.some((entry) => {
+        const existingStart = new Date(entry.dateStart)
+        const existingEnd = new Date(
+            existingStart.getTime() + entry.time * 60000
+        )
+
+        const isTimeOverlap = newStart < existingEnd && newEnd > existingStart
+        const isExactMatch =
+            newStart.getTime() === existingStart.getTime() &&
+            newEnd.getTime() === existingEnd.getTime()
+
+        return isTimeOverlap || isExactMatch
+    })
 }

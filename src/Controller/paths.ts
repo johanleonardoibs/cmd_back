@@ -7,4 +7,8 @@ export enum Paths {
     CALENDAR_PERIOD_USER = '/calendar/period/:user',
     // Calendar Entry
     CALENDAR_ENTRY = '/calendar/entry/:user',
+    // Procedure
+    PROCEDURE = '/procedure',
+    // Schedule
+    SCHEDULE = '/schedule',
 }

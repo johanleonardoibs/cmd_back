@@ -1,6 +1,6 @@
 import express from 'express'
 import { Paths } from '@Controller/paths.ts'
-import { getUserById } from '@Repository/Users'
+import { getUserById } from '@Repository'
 import type { CreateCalendarEntry } from '@Domain/Entity'
 import { addCalendarEntry } from '@Service/UserCalendarEntry'
 import { getUserCalendarPeriods } from '@Service/UserCalendar'

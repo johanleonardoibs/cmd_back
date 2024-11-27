@@ -16,6 +16,12 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."field_type" AS ENUM('text', 'number', 'file', 'date');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" varchar(256),
@@ -56,6 +62,22 @@ CREATE TABLE IF NOT EXISTS "user_to_calendar_period" (
 	"user" integer NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "procedures" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
+	"cups" varchar NOT NULL,
+	"session_duration" integer NOT NULL,
+	CONSTRAINT "procedures_cups_unique" UNIQUE("cups")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "dynamic_fields" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"procedure" integer NOT NULL,
+	"name" varchar NOT NULL,
+	"description" varchar,
+	"type" "field_type" NOT NULL
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "user_to_calendar_entry" ADD CONSTRAINT "user_to_calendar_entry_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
@@ -76,6 +98,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "user_to_calendar_period" ADD CONSTRAINT "user_to_calendar_period_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "dynamic_fields" ADD CONSTRAINT "dynamic_fields_procedure_procedures_id_fk" FOREIGN KEY ("procedure") REFERENCES "public"."procedures"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

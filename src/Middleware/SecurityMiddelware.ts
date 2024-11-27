@@ -13,6 +13,9 @@ const pathPermissions: Record<string, Role[]> = {
     [Paths.CALENDAR_PERIOD + '_POST']: [Role.Admin, Role.Medic],
     [Paths.CALENDAR_ENTRY + '_POST']: [Role.Admin],
     [Paths.CALENDAR_ENTRY + '_GET']: [Role.Admin, Role.Medic, Role.Patient],
+    [Paths.PROCEDURE + '_POST']: [Role.Admin],
+    [Paths.PROCEDURE + '_GET']: [Role.Admin],
+    [Paths.SCHEDULE + '_POST']: [Role.Admin],
 }
 
 const isPathProtected = (path: string) => {

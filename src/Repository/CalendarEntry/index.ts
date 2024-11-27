@@ -1,21 +1,23 @@
 import {
-    calendarEntry,
-    calendarPeriod,
+    calendarEntries,
+    type CalendarEntry,
     type CreateCalendarEntry,
     userToCalendarEntry,
 } from '@Domain/Entity'
 import { db } from '@Utils/DatabaseConnection.ts'
 import { eq } from 'drizzle-orm'
 
-export const getCalendarEntries = async (userId: number) => {
+export const getCalendarEntries = async (
+    userId: number
+): Promise<CalendarEntry[]> => {
     const results = await db
         .select({
-            entry: calendarEntry,
+            entry: calendarEntries,
         })
         .from(userToCalendarEntry)
         .innerJoin(
-            calendarPeriod,
-            eq(userToCalendarEntry.calendarEntry, calendarEntry.id)
+            calendarEntries,
+            eq(userToCalendarEntry.calendarEntry, calendarEntries.id)
         )
         .where(eq(userToCalendarEntry.user, userId))
         .execute()
@@ -23,11 +25,11 @@ export const getCalendarEntries = async (userId: number) => {
     return results.map(({ entry }) => entry)
 }
 
-export const createCalendarEntry = (newEntry: CreateCalendarEntry) => {
+export const saveCalendarEntry = (newEntry: CreateCalendarEntry) => {
     return db
-        .insert(calendarEntry)
+        .insert(calendarEntries)
         .values(newEntry)
-        .returning({ id: calendarEntry.id })
+        .returning({ id: calendarEntries.id })
 }
 
 export const createEntryRelation = (calentarEntry: number, user: number) => {

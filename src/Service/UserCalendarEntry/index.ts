@@ -1,16 +1,16 @@
 import { type CreateCalendarEntry, type User } from '@Domain/Entity'
 import {
-    createCalendarEntry,
     createEntryRelation,
     getCalendarEntries,
-} from '@Repository/CalendarEntry'
+    saveCalendarEntry,
+} from '@Repository'
 
 export const addCalendarEntry = async (
     user: User,
     newEntry: CreateCalendarEntry
 ) => {
     const calendarEntry = (
-        await createCalendarEntry({
+        await saveCalendarEntry({
             ...newEntry,
             dateStart: new Date(newEntry.dateStart),
         })

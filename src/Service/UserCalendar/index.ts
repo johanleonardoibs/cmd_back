@@ -4,7 +4,7 @@ import {
     getCalendarPeriods,
     saveCalendarPeriod,
     savePeriodRelation,
-} from '@Repository/CalendarPeriod'
+} from '@Repository'
 
 export const createCalendarPeriod = async (
     newPeriod: CreateCalendarPeriod,

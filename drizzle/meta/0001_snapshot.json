@@ -1,6 +1,6 @@
 {
-  "id": "e8f15692-bf0f-4f18-81da-d66f418c11f9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "a77a9cdc-74e4-480e-a9ee-7b578d154a7f",
+  "prevId": "e8f15692-bf0f-4f18-81da-d66f418c11f9",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -368,6 +368,99 @@
         "dynamic_fields_procedure_procedures_id_fk": {
           "name": "dynamic_fields_procedure_procedures_id_fk",
           "tableFrom": "dynamic_fields",
+          "tableTo": "procedures",
+          "columnsFrom": [
+            "procedure"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.schedules": {
+      "name": "schedules",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "calendarEntry": {
+          "name": "calendarEntry",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "medic": {
+          "name": "medic",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patient": {
+          "name": "patient",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure": {
+          "name": "procedure",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "schedules_calendarEntry_calendar_entry_id_fk": {
+          "name": "schedules_calendarEntry_calendar_entry_id_fk",
+          "tableFrom": "schedules",
+          "tableTo": "calendar_entry",
+          "columnsFrom": [
+            "calendarEntry"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "schedules_medic_users_id_fk": {
+          "name": "schedules_medic_users_id_fk",
+          "tableFrom": "schedules",
+          "tableTo": "users",
+          "columnsFrom": [
+            "medic"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "schedules_patient_users_id_fk": {
+          "name": "schedules_patient_users_id_fk",
+          "tableFrom": "schedules",
+          "tableTo": "users",
+          "columnsFrom": [
+            "patient"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "schedules_procedure_procedures_id_fk": {
+          "name": "schedules_procedure_procedures_id_fk",
+          "tableFrom": "schedules",
           "tableTo": "procedures",
           "columnsFrom": [
             "procedure"

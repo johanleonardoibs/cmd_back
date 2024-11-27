@@ -3,6 +3,8 @@ export enum Errors {
     B_USER00 = 'errors.user.bad_login',
     B_USER01 = 'errors.user.bad_register',
     B_ANY00 = 'errors.{table}.foreign',
+    B_ANY01 = 'errors.bad_request',
+    BC_CONF00 = 'errors.{table}.date_conflict',
 
     // NotFound Request
     N_ANY00 = 'errors.{table}.not_found',
