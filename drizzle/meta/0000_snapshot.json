@@ -1,5 +1,5 @@
 {
-  "id": "f13083df-0c8c-4f87-9575-d4162227dd39",
+  "id": "2fa3cb51-2f38-4ab6-89f4-463fb9d08b93",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -104,23 +104,17 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_calendar": {
-          "name": "user_calendar",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "date_start": {
           "name": "date_start",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "time": {
           "name": "time",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -138,48 +132,42 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_calendar_period": {
-          "name": "user_calendar_period",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "date_start": {
           "name": "date_start",
           "type": "date",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "initial_hour": {
           "name": "initial_hour",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "time": {
           "name": "time",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "daysOfWeek": {
           "name": "daysOfWeek",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "weeks": {
           "name": "weeks",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "entryType": {
           "name": "entryType",
           "type": "entryType",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -248,7 +236,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },

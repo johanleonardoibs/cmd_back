@@ -30,20 +30,18 @@ CREATE TABLE IF NOT EXISTS "users" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "calendar_entry" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_calendar" integer,
-	"date_start" timestamp,
-	"time" integer
+	"date_start" timestamp NOT NULL,
+	"time" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "calendar_period" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_calendar_period" integer,
-	"date_start" date,
-	"initial_hour" integer,
-	"time" integer,
-	"daysOfWeek" varchar,
-	"weeks" integer,
-	"entryType" "entryType"
+	"date_start" date NOT NULL,
+	"initial_hour" integer NOT NULL,
+	"time" integer NOT NULL,
+	"daysOfWeek" varchar NOT NULL,
+	"weeks" integer NOT NULL,
+	"entryType" "entryType" NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_to_calendar_entry" (
@@ -53,7 +51,7 @@ CREATE TABLE IF NOT EXISTS "user_to_calendar_entry" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_to_calendar_period" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"calenda_period" integer NOT NULL,
 	"user" integer NOT NULL
 );

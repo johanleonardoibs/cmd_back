@@ -10,7 +10,9 @@ declare module 'express-serve-static-core' {
 }
 
 const pathPermissions: Record<string, Role[]> = {
-    [Paths.CALENDAR_PERIOD]: [Role.Admin, Role.Medic],
+    [Paths.CALENDAR_PERIOD + '_POST']: [Role.Admin, Role.Medic],
+    [Paths.CALENDAR_ENTRY + '_POST']: [Role.Admin],
+    [Paths.CALENDAR_ENTRY + '_GET']: [Role.Admin, Role.Medic, Role.Patient],
 }
 
 const isPathProtected = (path: string) => {
@@ -28,18 +30,24 @@ const validateRole = (path: string, userRole: Role) => {
 export const interceptor = (req: Request, res: Response, next: () => any) => {
     const token = req.headers.authorization?.split(' ')[1] ?? ''
 
-    if (!isPathProtected(req.path)) return next()
+    if (!isPathProtected(req.path + '_' + req.method)) return next()
     if (token) {
-        const user = validateToken(token)
+        try {
+            const user = validateToken(token)
 
-        if (user) {
-            req.user = user
+            if (user) {
+                req.user = user
 
-            if (validateRole(req.path, user.role as Role)) {
-                return next()
-            } else {
-                return res.sendStatus(401)
+                if (
+                    validateRole(req.path + '_' + req.method, user.role as Role)
+                ) {
+                    return next()
+                } else {
+                    return res.sendStatus(401)
+                }
             }
+        } catch (e) {
+            return res.sendStatus(403)
         }
     }
 

@@ -1,9 +1,9 @@
-import { integer, pgTable } from 'drizzle-orm/pg-core'
+import { integer, pgTable, serial } from 'drizzle-orm/pg-core'
 import { calendarPeriod } from '@Domain/Entity/CalendarPeriod'
 import { users } from '@Domain/Entity'
 
 export const userToCalendarPeriod = pgTable('user_to_calendar_period', {
-    id: integer('id').primaryKey(),
+    id: serial('id').primaryKey(),
     calendarPeriod: integer('calenda_period')
         .notNull()
         .references(() => calendarPeriod.id),
@@ -11,3 +11,8 @@ export const userToCalendarPeriod = pgTable('user_to_calendar_period', {
         .notNull()
         .references(() => users.id),
 })
+
+export type CreatePeriodRelation = Omit<
+    typeof userToCalendarPeriod.$inferInsert,
+    'id'
+>

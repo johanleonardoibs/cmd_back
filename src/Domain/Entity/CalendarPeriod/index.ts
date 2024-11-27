@@ -3,13 +3,12 @@ import { entryTypeEnum } from '@Domain/Entity/EntryType'
 
 export const calendarPeriod = pgTable('calendar_period', {
     id: serial('id').primaryKey(),
-    userCalendarPeriod: integer('user_calendar_period'),
-    dateStart: date('date_start'),
-    initialHour: integer('initial_hour'),
-    time: integer('time'),
-    daysOfWeek: varchar('daysOfWeek'),
-    weeks: integer('weeks'),
-    entryType: entryTypeEnum('entryType'),
+    dateStart: date('date_start').notNull(),
+    initialHour: integer('initial_hour').notNull(),
+    time: integer('time').notNull(),
+    daysOfWeek: varchar('daysOfWeek').notNull(),
+    weeks: integer('weeks').notNull(),
+    entryType: entryTypeEnum('entryType').notNull(),
 })
 
 export type CalendarPeriod = typeof calendarPeriod.$inferSelect

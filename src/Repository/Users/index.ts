@@ -9,3 +9,7 @@ export const saveUser = async (user: NewUser) => {
 export const getUser = async (email: string) => {
     return db.select().from(users).where(eq(users.email, email)).execute()
 }
+
+export const getUserById = async (id: number) => {
+    return db.select().from(users).where(eq(users.id, id)).execute()
+}

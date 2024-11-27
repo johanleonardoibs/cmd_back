@@ -1,19 +1,31 @@
 import express from 'express'
 import type { CreateCalendarPeriod } from '@Domain/Entity/CalendarPeriod'
 import { Paths } from '@Controller/paths.ts'
-import { createCalendarPeriod } from '@Service/UserCalendar'
+import {
+    createCalendarPeriod,
+    getUserCalendarPeriods,
+} from '@Service/UserCalendar'
+import { getUserById } from '@Repository/Users'
 
 const router = express.Router()
 
-export const UserCalendarController = router.post(
-    Paths.CALENDAR_PERIOD,
-    (req, res) => {
+export const UserCalendarController = router
+    .post(Paths.CALENDAR_PERIOD, (req, res) => {
         const userCalendarPeriod: CreateCalendarPeriod = req.body
 
         if (req.user) {
-            void createCalendarPeriod(userCalendarPeriod, req.user)
+            createCalendarPeriod(userCalendarPeriod, req.user).then(() => {
+                res.sendStatus(201)
+            })
         }
+    })
+    .get(Paths.CALENDAR_PERIOD_USER, async (req, res) => {
+        const userId = req.params.user
+        const user = (await getUserById(Number(userId))).shift()
 
-        res.json(userCalendarPeriod)
-    }
-)
+        if (user) {
+            getUserCalendarPeriods(user).then((response) => {
+                res.json(response)
+            })
+        }
+    })
